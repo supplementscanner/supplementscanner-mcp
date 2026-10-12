@@ -1,0 +1,43 @@
+{
+  "name": "supplementscanner-mcp",
+  "version": "1.1.0",
+  "description": "Supplement price comparison MCP server: live prices from Dutch and Belgian stores per kg, serving or capsule. Stdio bridge to the free hosted endpoint, no API key.",
+  "mcpName": "io.github.supplementscanner/scanner",
+  "type": "module",
+  "bin": {
+    "supplementscanner-mcp": "bin/supplementscanner-mcp.js"
+  },
+  "files": [
+    "bin"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.0"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "mcp-bridge",
+    "ai-agents",
+    "claude",
+    "chatgpt",
+    "supplements",
+    "price-comparison",
+    "price-per-unit",
+    "protein-powder",
+    "vitamins",
+    "europe",
+    "netherlands",
+    "belgium"
+  ],
+  "homepage": "https://supplementscanner.eu/developers",
+  "bugs": "https://github.com/supplementscanner/supplementscanner-mcp/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supplementscanner/supplementscanner-mcp.git"
+  },
+  "license": "MIT"
+}
