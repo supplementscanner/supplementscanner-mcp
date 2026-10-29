@@ -1,7 +1,7 @@
 {
   "name": "supplementscanner-mcp",
-  "version": "1.1.0",
-  "description": "Supplement price comparison MCP server: live prices from Dutch and Belgian stores per kg, serving or capsule. Stdio bridge to the free hosted endpoint, no API key.",
+  "version": "1.2.0",
+  "description": "Supplement price comparison MCP server: live prices from stores across Europe per kg, serving or capsule. Stdio bridge to the free hosted endpoint, no API key.",
   "mcpName": "io.github.supplementscanner/scanner",
   "type": "module",
   "bin": {
@@ -31,7 +31,13 @@
     "vitamins",
     "europe",
     "netherlands",
-    "belgium"
+    "belgium",
+    "france",
+    "united-kingdom",
+    "poland",
+    "denmark",
+    "spain",
+    "austria"
   ],
   "homepage": "https://supplementscanner.eu/developers",
   "bugs": "https://github.com/supplementscanner/supplementscanner-mcp/issues",

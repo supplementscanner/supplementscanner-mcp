@@ -16,6 +16,12 @@ const HUB_ENDPOINT = 'https://mcp.supplementscanner.eu';
 const ENDPOINTS = {
     nl: 'https://mcp.supplementenscanner.nl',
     be: 'https://mcp.supplementscanner.be',
+    fr: 'https://mcp.supplementscanner.fr',
+    gb: 'https://mcp.supplementscanner.co.uk',
+    pl: 'https://mcp.supplementscanner.pl',
+    dk: 'https://mcp.supplementscanner.dk',
+    es: 'https://mcp.suplementoscanner.es',
+    at: 'https://mcp.supplementscanner.at',
 };
 
 const market = (process.argv[2] ?? process.env.SUPPLEMENTSCANNER_MARKET)?.toLowerCase();

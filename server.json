@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.supplementscanner/scanner",
   "title": "Supplementscanner",
-  "description": "Live supplement prices per kg, serving or capsule from Dutch and Belgian stores. Free, no API key.",
-  "version": "1.1.0",
+  "description": "Live supplement prices per kg, serving or capsule from stores across Europe. Free, no API key.",
+  "version": "1.2.0",
   "websiteUrl": "https://supplementscanner.eu/developers",
   "repository": {
     "url": "https://github.com/supplementscanner/supplementscanner-mcp",
@@ -19,16 +19,16 @@
     {
       "registryType": "npm",
       "identifier": "supplementscanner-mcp",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
           "name": "SUPPLEMENTSCANNER_MARKET",
-          "description": "Connect to one country's own endpoint (nl or be), which answers for that country when a request names none. Unset, the bridge connects to https://mcp.supplementscanner.eu.",
+          "description": "Connect to one country's own endpoint (nl, be, fr, gb, pl, dk, es or at), which answers for that country when a request names none. Unset, the bridge connects to https://mcp.supplementscanner.eu.",
           "isRequired": false,
-          "choices": ["nl", "be"]
+          "choices": ["nl", "be", "fr", "gb", "pl", "dk", "es", "at"]
         }
       ]
     }

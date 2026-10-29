@@ -1,6 +1,6 @@
 # Supplementscanner MCP Server
 
-**Supplementscanner is a hosted MCP server for supplement price comparison.** It gives AI assistants such as Claude, ChatGPT, Cursor and VS Code live prices from supplement web stores in the Netherlands and Belgium, normalized to a price per kg, per serving or per capsule. It is free and read-only, and it needs no API key or account.
+**Supplementscanner is a hosted MCP server for supplement price comparison.** It gives AI assistants such as Claude, ChatGPT, Cursor and VS Code live prices from supplement web stores across Europe, normalized to a price per kg, per serving or per capsule. It is free and read-only, and it needs no API key or account.
 
 We scan. You save.
 
@@ -16,7 +16,7 @@ This MCP server gives an assistant the same view. Ask where whey isolate, creati
 
 - **Per-unit prices:** every product is compared on its category's unit: per kg for powders, per serving or per capsule for the rest.
 - **Live data:** prices are refreshed around the clock, and every response says when the data was last scanned.
-- **Two markets:** the Netherlands and Belgium, with prices in euros.
+- **Eight markets:** the Netherlands, Belgium, France, the United Kingdom, Poland, Denmark, Spain and Austria, each in its own currency.
 - **No setup:** one HTTPS endpoint, streamable HTTP transport, no authentication.
 
 ## Tools
@@ -45,10 +45,16 @@ Money comes back as integer cents plus a string formatted for the market's local
 | --- | --- | --- | --- |
 | Netherlands | [supplementenscanner.nl](https://supplementenscanner.nl) | `nl` | `https://mcp.supplementenscanner.nl` |
 | Belgium | [supplementscanner.be](https://supplementscanner.be) | `be` | `https://mcp.supplementscanner.be` |
+| France | [supplementscanner.fr](https://supplementscanner.fr) | `fr` | `https://mcp.supplementscanner.fr` |
+| United Kingdom | [supplementscanner.co.uk](https://supplementscanner.co.uk) | `gb` | `https://mcp.supplementscanner.co.uk` |
+| Poland | [supplementscanner.pl](https://supplementscanner.pl) | `pl` | `https://mcp.supplementscanner.pl` |
+| Denmark | [supplementscanner.dk](https://supplementscanner.dk) | `dk` | `https://mcp.supplementscanner.dk` |
+| Spain | [suplementoscanner.es](https://suplementoscanner.es) | `es` | `https://mcp.suplementoscanner.es` |
+| Austria | [supplementscanner.at](https://supplementscanner.at) | `at` | `https://mcp.supplementscanner.at` |
 
-In the Netherlands the service is called Supplementenscanner.
+In the Netherlands the service is called Supplementenscanner, and in Spain Suplementoscanner.
 
-`https://mcp.supplementscanner.eu` answers for every market. Without a `market` argument it answers for the Netherlands; pass `market: "be"` for Belgian prices. Each country also has an endpoint of its own, which defaults to that country and otherwise works the same way.
+`https://mcp.supplementscanner.eu` answers for every market. Without a `market` argument it answers for the Netherlands; pass `market: "be"` for Belgian prices, `market: "gb"` for British ones, and so on. Each country also has an endpoint of its own, which defaults to that country and otherwise works the same way.
 
 ## Connect
 
@@ -176,7 +182,7 @@ Products are compared within their category on one unit: per kg for protein powd
 
 ### Which countries and stores are covered?
 
-The Netherlands and Belgium, with prices in euros. Stores are added over time, and `list_categories` returns the live store count for each category.
+The Netherlands, Belgium, France, the United Kingdom, Poland, Denmark, Spain and Austria. Each market is priced in its own currency (euros, pounds, złoty or kroner), and every response states the market it is scoped to. Markets and stores are added over time, and `list_categories` returns the live store count for each category.
 
 ### How up to date are the prices?
 
