@@ -1,6 +1,6 @@
 # Supplementscanner MCP Server
 
-**Supplementscanner is a hosted MCP server for supplement price comparison.** It gives AI assistants such as Claude, ChatGPT, Cursor and VS Code live prices from supplement web stores across Europe, normalized to a price per kg, per serving or per capsule. It is free and read-only, and it needs no API key or account.
+**Supplementscanner is a hosted MCP server for supplement price comparison.** It gives AI assistants such as Claude, ChatGPT, Cursor and VS Code live prices from supplement web stores across Europe, normalized to a price per kg, per serving or per capsule. It is free and read-only, and it needs no API key or account. Supplementscanner earns a commission on some purchases made through the shop links it returns (`buy_url`). The price-history pages on our own site (`page_url`) are commission-free.
 
 We scan. You save.
 
@@ -12,11 +12,11 @@ https://mcp.supplementscanner.eu
 
 A sticker price says little about value. A 2.5 kg tub of whey and a 900 g pouch, or a jar of 60 capsules and one of 240, only become comparable once the price is divided by what the pack holds. Supplementscanner scans supplement stores continuously and does that division for every product, so each category can be ordered by the price you actually pay per unit.
 
-This MCP server gives an assistant the same view. Ask where whey isolate, creatine monohydrate, magnesium bisglycinate or vitamin D3 costs least per unit, and it answers from live prices, with the store, the pack size, the unit price and a link to buy.
+This MCP server gives an assistant the same view. Ask where whey isolate, creatine monohydrate, magnesium bisglycinate or vitamin D3 costs least per unit, and it answers from live prices, with the store, the pack size, the unit price, a link to the shop and a link to the product's price history.
 
 - **Per-unit prices:** every product is compared on its category's unit: per kg for powders, per serving or per capsule for the rest.
 - **Live data:** prices are refreshed around the clock, and every response says when the data was last scanned.
-- **Eight markets:** the Netherlands, Belgium, France, the United Kingdom, Poland, Denmark, Spain and Austria, each in its own currency.
+- **Fifteen markets:** the Netherlands, Belgium, France, the United Kingdom, Poland, Spain, Denmark, Austria, Germany, Czechia, Portugal, Sweden, Italy, Switzerland and Slovakia, each in its own currency.
 - **No setup:** one HTTPS endpoint, streamable HTTP transport, no authentication.
 
 ## Tools
@@ -28,7 +28,7 @@ All four tools are read-only.
 | `find_cheapest` | Products in a category and all its subcategories, ordered by lowest price per unit. Start here. | `category_slug`, `limit`, `in_stock_only`, `market` |
 | `list_categories` | The category tree, each category with a live product count, store count and lowest unit price. Use it to find a `category_slug`. | `market` |
 | `search_products` | Typo-tolerant search across the whole catalogue by product name or brand. | `query`, `category_slug`, `max_unit_price_cents`, `in_stock_only`, `limit`, `market` |
-| `get_product` | One product in full: price, unit price, size, bulk discount tiers, buy link and recent price history. | `product_id`, `market` |
+| `get_product` | One product in full: price, unit price, size, bulk discount tiers, shop link and recent price history. | `product_id`, `market` |
 
 Money comes back as integer cents plus a string formatted for the market's locale. Every response carries `last_scraped_at`, so an assistant can tell the user how fresh a price is.
 
@@ -51,10 +51,17 @@ Money comes back as integer cents plus a string formatted for the market's local
 | Denmark | [supplementscanner.dk](https://supplementscanner.dk) | `dk` | `https://mcp.supplementscanner.dk` |
 | Spain | [suplementoscanner.es](https://suplementoscanner.es) | `es` | `https://mcp.suplementoscanner.es` |
 | Austria | [supplementscanner.at](https://supplementscanner.at) | `at` | `https://mcp.supplementscanner.at` |
+| Germany | [supplement-scanner.de](https://supplement-scanner.de) | `de` | `https://mcp.supplement-scanner.de` |
+| Czechia | [supplementscanner.cz](https://supplementscanner.cz) | `cz` | `https://mcp.supplementscanner.cz` |
+| Portugal | [suplementoscanner.pt](https://suplementoscanner.pt) | `pt` | `https://mcp.suplementoscanner.pt` |
+| Sweden | [supplementscanner.se](https://supplementscanner.se) | `se` | `https://mcp.supplementscanner.se` |
+| Italy | [supplementscanner.it](https://supplementscanner.it) | `it` | `https://mcp.supplementscanner.it` |
+| Switzerland | [supplementscanner.ch](https://supplementscanner.ch) | `ch` | `https://mcp.supplementscanner.ch` |
+| Slovakia | [supplementscanner.sk](https://supplementscanner.sk) | `sk` | `https://mcp.supplementscanner.sk` |
 
-In the Netherlands the service is called Supplementenscanner, and in Spain Suplementoscanner.
+In the Netherlands the service is called Supplementenscanner, and in Spain and Portugal Suplementoscanner.
 
-`https://mcp.supplementscanner.eu` answers for every market. Without a `market` argument it answers for the Netherlands; pass `market: "be"` for Belgian prices, `market: "gb"` for British ones, and so on. Each country also has an endpoint of its own, which defaults to that country and otherwise works the same way.
+`https://mcp.supplementscanner.eu` answers for every market. Without a `market` argument it answers for the Netherlands; pass `market: "be"` for Belgian prices, `market: "gb"` for British ones, and so on. The tool schemas list the accepted codes as an enum, and any other value is rejected. Each country also has an endpoint of its own, which defaults to that country and otherwise works the same way.
 
 ## Connect
 
@@ -182,7 +189,7 @@ Products are compared within their category on one unit: per kg for protein powd
 
 ### Which countries and stores are covered?
 
-The Netherlands, Belgium, France, the United Kingdom, Poland, Denmark, Spain and Austria. Each market is priced in its own currency (euros, pounds, złoty or kroner), and every response states the market it is scoped to. Markets and stores are added over time, and `list_categories` returns the live store count for each category.
+The Netherlands, Belgium, France, the United Kingdom, Poland, Spain, Denmark, Austria, Germany, Czechia, Portugal, Sweden, Italy, Switzerland and Slovakia. Each market is priced in its own currency (euros, pounds, złoty, kroner, kronor, koruna or francs), and every response states the market it is scoped to. Markets and stores are added over time, and `list_categories` returns the live store count for each category.
 
 ### How up to date are the prices?
 
@@ -198,7 +205,7 @@ Yes. The same catalogue is available as a JSON API at `https://api.supplementsca
 
 ## Affiliate links
 
-Buy links are affiliate links: when someone buys through one, the store may pay Supplementscanner a commission. Commission plays no part in the order of results. Every response that shows prices includes an `affiliate_disclosure` string, and assistants are asked to pass it on.
+Every product comes with two links. `buy_url` goes to the shop's product page and may be an affiliate link: when someone buys through one, the store may pay Supplementscanner a commission. `page_url` goes to the product's price-history page on our own site, which earns us nothing. Commission plays no part in the order of results, and the server does not tell assistants which link to show. Every response that shows prices includes an `affiliate_disclosure` string, and assistants are asked to pass it on.
 
 ## Also available
 

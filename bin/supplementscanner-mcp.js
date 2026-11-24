@@ -22,6 +22,13 @@ const ENDPOINTS = {
     dk: 'https://mcp.supplementscanner.dk',
     es: 'https://mcp.suplementoscanner.es',
     at: 'https://mcp.supplementscanner.at',
+    de: 'https://mcp.supplement-scanner.de',
+    cz: 'https://mcp.supplementscanner.cz',
+    pt: 'https://mcp.suplementoscanner.pt',
+    se: 'https://mcp.supplementscanner.se',
+    it: 'https://mcp.supplementscanner.it',
+    ch: 'https://mcp.supplementscanner.ch',
+    sk: 'https://mcp.supplementscanner.sk',
 };
 
 const market = (process.argv[2] ?? process.env.SUPPLEMENTSCANNER_MARKET)?.toLowerCase();
